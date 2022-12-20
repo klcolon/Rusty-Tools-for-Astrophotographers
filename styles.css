@@ -1,0 +1,15 @@
+
+h1,h2 {
+    font-family: 'Rustic' , 'sans-serif';  
+    padding: left 200px;             
+    padding: right 200px;    
+    padding: top 200px;    
+    padding: bottom 200px;                           
+    color: hsl(300, 67%, 86%)
+  }
+
+  body {
+    margin: 200;
+    color: hsl(300, 67%, 86%);
+    line-height: 1.5;
+  }

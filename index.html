@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>Rusty Tools for Astrophotographers</title>
+    <link href="https://fonts.cdnfonts.com/css/rustic-2" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet"/>
+  </head>
+  <style>
+    body {
+      background-image: url('./images/star_trail.jpeg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+  <body>
+    <main>
+        <h1>
+            Rusty Tools for Astrophotographers
+        </h1> 
+        <h2> 
+            Welcome! This is a free web app for aligning, denoising, and 
+            projecting astrophotography images all written in Rust. Enjoy!
+        </h2>  
+    </main>
+    
+    <style>
+        div {
+          border: 5px solid black;
+          width: 500px;
+          height: 250px;
+        }
+        .active {
+          border: 5px dashed black;
+        }
+    </style>
+
+    <div></div>
+
+    <script>
+        const dropzone = document.querySelector('div');
+
+        dropzone.addEventListener('dragenter', event => {
+          event.preventDefault();
+          dropzone.classList.add('active');
+        });
+
+        dropzone.addEventListener('dragleave', event => {
+          event.preventDefault();
+          dropzone.classList.remove('active');
+        });
+
+        dropzone.addEventListener('dragover', event => {
+          event.preventDefault();
+        });
+
+        dropzone.addEventListener('drop', event => {
+          event.preventDefault();
+          dropzone.classList.remove('active');
+      
+          const file = event.dataTransfer.files[0];
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+      
+          reader.addEventListener('loadend', () => {
+          const img = document.createElement('img');
+          img.src = reader.result;
+          dropzone.append(img);
+          });
+        });
+      </script>
+
+    <script type="module">
+      import init, { greet } from "./pkg/RustyTools_Astro.js";
+      init().then(() => {
+        greet("Mother Fucker");
+      });
+    </script>
+  </body>
+</html>
