@@ -5,11 +5,34 @@ h1,h2 {
     padding: right 200px;    
     padding: top 200px;    
     padding: bottom 200px;                           
-    color: hsl(300, 67%, 86%)
+    color: hsl(26, 30%, 95%)
   }
 
   body {
+    background-image: url('./images/star_trail.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
     margin: 200;
-    color: hsl(300, 67%, 86%);
+    color:  hsl(26, 30%, 95%);
+    opacity: 0.85;
     line-height: 1.5;
+  }
+  div {
+     font-family: 'Rustic';
+     border: 5px dashed black;
+     width: 500px;
+     height: 250px;
+     background-color: gray;
+     overflow: hidden;
+     text-align: center;
+     opacity: 0.7;
+     text-align: center;
+     vertical-align: middle;
+     line-height: 215px;
+     font-size: 25px;
+     color: black;
+  }
+  .active {
+    border: 5px solid black;
   }

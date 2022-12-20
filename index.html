@@ -6,14 +6,6 @@
     <link href="https://fonts.cdnfonts.com/css/rustic-2" rel="stylesheet">
     <link href="styles.css" rel="stylesheet"/>
   </head>
-  <style>
-    body {
-      background-image: url('./images/star_trail.jpeg');
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: cover;
-    }
-  </style>
   <body>
     <main>
         <h1>
@@ -24,22 +16,44 @@
             projecting astrophotography images all written in Rust. Enjoy!
         </h2>  
     </main>
+
+    <div class="center";>
+      <p>
+        Drop directory containing images here
+      </p>
+    </div>
     
-    <style>
-        div {
-          border: 5px solid black;
-          width: 500px;
-          height: 250px;
-        }
-        .active {
-          border: 5px dashed black;
-        }
-    </style>
-
-    <div></div>
-
     <script>
         const dropzone = document.querySelector('div');
+
+        function traverseFileTree(item, path) {
+          path = path || "";
+          if (item.isFile) {
+          // Get file
+          item.file(function(file) {
+            console.log("File:", path + file.name);
+          });
+         }
+          else if (item.isDirectory) {
+        // Get folder contents
+        var dirReader = item.createReader();
+        dirReader.readEntries(function(entries) {
+          for (var i=0; i<entries.length; i++) {
+            traverseFileTree(entries[i], path + item.name + "/");
+          }
+        });
+      }
+    }
+        dropArea.addEventListener("drop", function(event) {
+          event.preventDefault();
+           var items = event.dataTransfer.items;
+           for (var i=0; i<items.length; i++) {
+            var item = items[i].webkitGetAsEntry();
+             if (item) {
+               traverseFileTree(item);
+              }
+            }
+          }, false);
 
         dropzone.addEventListener('dragenter', event => {
           event.preventDefault();
@@ -57,18 +71,7 @@
 
         dropzone.addEventListener('drop', event => {
           event.preventDefault();
-          dropzone.classList.remove('active');
-      
-          const file = event.dataTransfer.files[0];
-          const reader = new FileReader();
-          reader.readAsDataURL(file);
-      
-          reader.addEventListener('loadend', () => {
-          const img = document.createElement('img');
-          img.src = reader.result;
-          dropzone.append(img);
-          });
-        });
+          dropzone.classList.remove('active')};
       </script>
 
     <script type="module">
