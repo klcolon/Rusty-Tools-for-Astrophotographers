@@ -1,11 +1,10 @@
-
 h1,h2 {
     font-family: 'Rustic' , 'sans-serif';  
-    padding: left 200px;             
-    padding: right 200px;    
-    padding: top 200px;    
-    padding: bottom 200px;                           
-    color: hsl(26, 30%, 95%)
+    margin: 250 px;  
+    text-align: center;                     
+    color: hsl(26, 30%, 95%);
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, 
+    -2px 2px 0 #000, 2px 2px 0 #000; 
   }
 
   body {
@@ -18,21 +17,42 @@ h1,h2 {
     opacity: 0.85;
     line-height: 1.5;
   }
-  div {
+#dropzone{
+     margin: 0 auto;
+     padding: top 100 px;
      font-family: 'Rustic';
      border: 5px dashed black;
+     display: block;
+     box-sizing: border-box;
      width: 500px;
      height: 250px;
      background-color: gray;
-     overflow: hidden;
      text-align: center;
-     opacity: 0.7;
-     text-align: center;
-     vertical-align: middle;
+     opacity: 0.85;
      line-height: 215px;
      font-size: 25px;
-     color: black;
+     color: rgba(0, 0, 0, 1);;
   }
-  .active {
+  .hover {
     border: 5px solid black;
   }
+  .container {
+    cursor: grab;
+    overflow: auto;
+  } 
+  li {
+    font: normal 14px sans-serif;
+    border: solid 1px #0d0d0d;
+    list-style-type: none;
+    margin: 0 auto;
+    text-align: left;
+  }
+  ul{
+    margin: 0 auto;
+    padding: 0;
+    text-align: left;
+  }
+  p{
+    margin: 0 auto;
+    text-align: center;
+     }

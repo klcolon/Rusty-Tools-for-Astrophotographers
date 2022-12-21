@@ -1,78 +1,94 @@
 <!DOCTYPE html>
 <html lang="en-US">
+
   <head>
     <meta charset="utf-8" />
     <title>Rusty Tools for Astrophotographers</title>
     <link href="https://fonts.cdnfonts.com/css/rustic-2" rel="stylesheet">
     <link href="styles.css" rel="stylesheet"/>
   </head>
+
   <body>
+
     <main>
         <h1>
             Rusty Tools for Astrophotographers
         </h1> 
         <h2> 
             Welcome! This is a free web app for aligning, denoising, and 
-            projecting astrophotography images all written in Rust. Enjoy!
+            projecting astrophotography images all written in Rust. Make sure
+            your Chrome version is >= 21. Enjoy!
         </h2>  
     </main>
 
-    <div class="center";>
-      <p>
-        Drop directory containing images here
-      </p>
+    <div id="dropzone" class="container">
+      <ul id="filelist">
+        <p id="message">
+          Drop Image Directory Here!
+        </p>
+      </ul>
     </div>
     
     <script>
-        const dropzone = document.querySelector('div');
-
-        function traverseFileTree(item, path) {
-          path = path || "";
-          if (item.isFile) {
-          // Get file
+        window.addEventListener('load', function() {
+        var dropzone = document.querySelector('#dropzone');
+        var filelist = document.querySelector('#filelist');
+        // https://gist.github.com/tiff/3076863
+        var traverseFileTree = function self(item, path) {
+        path = path || "";
+        if (item.isFile) {
+         // Get file
           item.file(function(file) {
-            console.log("File:", path + file.name);
+            var li = document.createElement('li');
+            li.innerText = path + file.name;
+            filelist.appendChild(li);
           });
-         }
-          else if (item.isDirectory) {
-        // Get folder contents
-        var dirReader = item.createReader();
-        dirReader.readEntries(function(entries) {
-          for (var i=0; i<entries.length; i++) {
-            traverseFileTree(entries[i], path + item.name + "/");
-          }
-        });
-      }
-    }
-        dropArea.addEventListener("drop", function(event) {
-          event.preventDefault();
-           var items = event.dataTransfer.items;
-           for (var i=0; i<items.length; i++) {
-            var item = items[i].webkitGetAsEntry();
-             if (item) {
-               traverseFileTree(item);
-              }
+        } 
+        else if (item.isDirectory) {
+          // Get folder contents
+          var dirReader = item.createReader();
+          dirReader.readEntries(function(entries) {
+            for (var i = 0; i < entries.length; i++) {
+              self(entries[i], path + item.name + "/");
             }
-          }, false);
-
-        dropzone.addEventListener('dragenter', event => {
-          event.preventDefault();
-          dropzone.classList.add('active');
-        });
-
-        dropzone.addEventListener('dragleave', event => {
-          event.preventDefault();
-          dropzone.classList.remove('active');
-        });
-
-        dropzone.addEventListener('dragover', event => {
-          event.preventDefault();
-        });
-
-        dropzone.addEventListener('drop', event => {
-          event.preventDefault();
-          dropzone.classList.remove('active')};
-      </script>
+          });
+        }
+      };
+      var dropEvent = function(e) {
+        //hide text message when folder is dropped
+        var text = document.getElementById("message");
+        text.style.display = "none";
+        //length of directory
+        var length = e.dataTransfer.items.length;
+        for (var i = 0; i < length; i++) {
+          // recursive directory search
+          traverseFileTree(e.dataTransfer.items[i].webkitGetAsEntry());
+        }
+        dropzone.classList.remove('hover');
+        e.stopPropagation();
+        e.preventDefault();
+        return false;
+      };
+      var dragEnter = function(e) {
+         dropzone.classList.add('hover');
+         e.stopPropagation();
+         e.preventDefault();
+        };
+      var dragOver = function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+      };
+      var dragLeave = function(e) {
+        dropzone.classList.remove('hover');
+        e.stopPropagation();
+        e.preventDefault();
+       };
+  dropzone.addEventListener('dragenter', dragEnter, false);
+  dropzone.addEventListener('dragover', dragOver, false);
+  dropzone.addEventListener('dragleave', dragLeave, false);
+  dropzone.addEventListener('drop', dropEvent, false);
+});
+    </script>
 
     <script type="module">
       import init, { greet } from "./pkg/RustyTools_Astro.js";
@@ -80,5 +96,6 @@
         greet("Mother Fucker");
       });
     </script>
+
   </body>
 </html>
