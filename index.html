@@ -16,7 +16,7 @@
         </h1> 
         <h2> 
             Welcome! This is a free web app for aligning, denoising, and 
-            projecting astrophotography images all written in Rust. Make sure
+            projecting astrophotography images, all written in Rust. Make sure
             your Chrome version is >= 21. Enjoy!
         </h2>  
     </main>
@@ -29,6 +29,15 @@
       </ul>
     </div>
     
+    <b id="phase">
+      Phase Cross Correlation
+    </b>
+    <br><br>
+    <input type="checkbox" id="switch" class="checkbox" />
+    <label for="switch" class="toggle" style="left: 140px;">
+    <p style="padding:6px">OFF        ON</p>
+    </label>
+
     <script>
         window.addEventListener('load', function() {
         var dropzone = document.querySelector('#dropzone');

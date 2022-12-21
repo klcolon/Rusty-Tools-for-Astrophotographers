@@ -52,7 +52,62 @@ h1,h2 {
     padding: 0;
     text-align: left;
   }
+
   p{
     margin: 0 auto;
     text-align: center;
+    font-family: 'Rustic';
+    color: hsl(26, 30%, 95%);
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
+    -1px 1px 0 #000, 1px 1px 0 #000; 
      }
+  #phase{
+    position : relative ;
+    margin: 0 auto;
+    top: 25px;
+    left:100px;
+    text-align: center;
+    font-family: 'Rustic';
+    color: hsl(26, 30%, 95%);
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
+    -1px 1px 0 #000, 1px 1px 0 #000; 
+    }
+
+  /* toggle in label designing */
+  .toggle {
+    position : relative ;
+    display : inline-block;
+    width : 100px;
+    height : 40px;
+    background-color: red;
+    border-radius: 30px;
+    border: 2px solid rgb(17, 16, 16);
+}
+       
+/* After slide changes */
+.toggle:after {
+    content: '';
+    position: absolute;
+    width: 55px;
+    height: 40px;
+    border-radius: 30px;
+    background-color: rgb(8, 7, 7);
+    top: 0px;
+    left: 0px;
+    transition:  all 0.3s;
+}
+
+/* Checkbox checked effect */
+.checkbox:checked + .toggle::after {
+  left : 50px;
+}
+     
+/* Checkbox checked toggle label bg color */
+.checkbox:checked + .toggle {
+  background-color: green;
+}
+     
+/* Checkbox vanished */
+.checkbox {
+  display : none;
+}
