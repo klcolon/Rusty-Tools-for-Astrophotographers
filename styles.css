@@ -18,8 +18,8 @@ h1,h2 {
     line-height: 1.5;
   }
 #dropzone{
-     margin: 0 auto;
-     padding: top 100 px;
+     position: absolute;
+     left:25%;
      font-family: 'Rustic';
      border: 5px dashed black;
      display: block;
@@ -27,7 +27,6 @@ h1,h2 {
      width: 500px;
      height: 250px;
      background-color: gray;
-     text-align: center;
      opacity: 0.85;
      line-height: 215px;
      font-size: 25px;
@@ -55,27 +54,17 @@ h1,h2 {
 
   p{
     margin: 0 auto;
-    text-align: center;
+    padding:0 auto;
+    position : relative ;
     font-family: 'Rustic';
     color: hsl(26, 30%, 95%);
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
     -1px 1px 0 #000, 1px 1px 0 #000; 
      }
-  #phase{
-    position : relative ;
-    margin: 0 auto;
-    top: 25px;
-    left:100px;
-    text-align: center;
-    font-family: 'Rustic';
-    color: hsl(26, 30%, 95%);
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
-    -1px 1px 0 #000, 1px 1px 0 #000; 
-    }
 
   /* toggle in label designing */
   .toggle {
-    position : relative ;
+    position : absolute ;
     display : inline-block;
     width : 100px;
     height : 40px;
