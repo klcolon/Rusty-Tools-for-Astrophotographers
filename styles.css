@@ -33,7 +33,13 @@ h1,h2 {
      color: rgba(0, 0, 0, 1);;
   }
   .hover {
+    position: absolute;
+    left:25%;
     border: 5px solid black;
+    display: block;
+    box-sizing: border-box;
+    width: 500px;
+    height: 250px;
   }
   .container {
     cursor: grab;
