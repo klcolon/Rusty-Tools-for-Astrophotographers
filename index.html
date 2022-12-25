@@ -152,11 +152,7 @@
       function whichButton(buttonElement){
       var buttonClickedId = buttonElement.id;
       if( buttonClickedId == "reset"){
-        //delete file list
-        var myList = document.getElementById('filelist');
-        myList.innerHTML = '';
-        //recreate it
-        var filelist = document.querySelector('#filelist');
+        window.location.reload();
         }
       }
         window.addEventListener('load', function() {
@@ -222,7 +218,7 @@
     <script type="module">
       import init, { greet } from "./pkg/RustyTools_Astro.js";
       init().then(() => {
-        greet("Mahalingdom");
+        greet("Mahalingam");
       });
     </script>
 

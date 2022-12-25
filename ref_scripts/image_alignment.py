@@ -460,9 +460,13 @@ def phase_affine_parallel(tiff_src_list, ref_src, max_dist=2,
     fwhm_range: range of fwhm to test
     phase_only: perform only phase correlation
     """
+    #get number of cores availible
+    n_available_cores = int((os.cpu_count())/2)
     
-    #parallel processing of each image
-    with ProcessPoolExecutor(max_workers=20) as exe:
+    print(f"Number of physical cores found = {n_available_cores}")
+    
+    #parallel processing of each image. Leave one core availible
+    with ProcessPoolExecutor(max_workers=n_available_cores-1) as exe:
         for tiff in tiff_src_list:
             exe.submit(phase_affine_alignment_single, tiff, ref_src, max_dist=max_dist, 
                        ransac_threshold=ransac_threshold,fwhm_range = fwhm_range, 
