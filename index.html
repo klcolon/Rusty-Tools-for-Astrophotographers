@@ -70,7 +70,7 @@
     Contrast Adjustment Options
   </u>
     
-    <p id="phase" style="position: absolute; left:6%; top:75%;">
+    <p id="phase" style="position: absolute; left:6%; top:75%;" onclick="whichButton(this)">
       Phase Cross Correlation
     </p>
     <input type="checkbox" id="phase_tog" class="checkbox" />
@@ -149,35 +149,38 @@
    
 
     <script>
+      //function get button id
       function whichButton(buttonElement){
-      var buttonClickedId = buttonElement.id;
-      if( buttonClickedId == "reset"){
-        window.location.reload();
+        var buttonClickedId = buttonElement.id;
+        if( buttonClickedId == "reset"){
+         window.location.reload();
+          }
         }
+      //scripts for drag and drop
+      window.addEventListener('load', function() {
+      var dropzone = document.querySelector('#dropzone');
+      var filelist = document.querySelector('#filelist');
+      // https://gist.github.com/tiff/3076863
+      var traverseFileTree = function self(item, path) {
+      //short circuit evaluation
+      path = path || "";
+      if (item.isFile) {
+        // Get file
+        item.file(function(file) {
+          var li = document.createElement('li');
+          li.innerText = path + file.name;
+          filelist.appendChild(li);
+        });
+      } 
+      else if (item.isDirectory) {
+        // Get folder contents
+        var dirReader = item.createReader();
+        dirReader.readEntries(function(entries) {
+          for (var i = 0; i < entries.length; i++) {
+            self(entries[i], path + item.name + "/");
+          }
+        });
       }
-        window.addEventListener('load', function() {
-        var dropzone = document.querySelector('#dropzone');
-        var filelist = document.querySelector('#filelist');
-        // https://gist.github.com/tiff/3076863
-        var traverseFileTree = function self(item, path) {
-        path = path || "";
-        if (item.isFile) {
-         // Get file
-          item.file(function(file) {
-            var li = document.createElement('li');
-            li.innerText = path + file.name;
-            filelist.appendChild(li);
-          });
-        } 
-        else if (item.isDirectory) {
-          // Get folder contents
-          var dirReader = item.createReader();
-          dirReader.readEntries(function(entries) {
-            for (var i = 0; i < entries.length; i++) {
-              self(entries[i], path + item.name + "/");
-            }
-          });
-        }
       };
       var dropEvent = function(e) {
         //hide text message when folder is dropped
@@ -208,19 +211,21 @@
         e.stopPropagation();
         e.preventDefault();
        };
-  dropzone.addEventListener('dragenter', dragEnter, false);
-  dropzone.addEventListener('dragover', dragOver, false);
-  dropzone.addEventListener('dragleave', dragLeave, false);
-  dropzone.addEventListener('drop', dropEvent, false);
-});
+    dropzone.addEventListener('dragenter', dragEnter, false);
+    dropzone.addEventListener('dragover', dragOver, false);
+    dropzone.addEventListener('dragleave', dragLeave, false);
+    dropzone.addEventListener('drop', dropEvent, false);
+  });
     </script>
 
     <script type="module">
-      import init, { greet } from "./pkg/RustyTools_Astro.js";
+      import init, { greet, read_image } from "./pkg/RustyTools_Astro.js";
       init().then(() => {
         greet("Mahalingam");
       });
+      if ( buttonClickedId == "phase"){
+        read_image();
+        }
     </script>
-
   </body>
 </html>

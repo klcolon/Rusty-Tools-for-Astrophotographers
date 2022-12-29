@@ -1,5 +1,5 @@
 [package]
-name = "RustyTools_Astro"
+name = "rustytools_astro"
 version = "0.0.1"
 authors = ["Katsuya Colon <kcolon@caltech.edu>"]
 description = "Tools to analyze astrophotography images."
@@ -12,3 +12,4 @@ crate-type = ["cdylib"]
 
 [dependencies]
 wasm-bindgen = "0.2"
+image = "0.13.0"
